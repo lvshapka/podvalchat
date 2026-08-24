@@ -66,3 +66,8 @@ a:hover {
 .button:hover {
 	background: linear-gradient(#004524, #30ba8f);
 }
+
+div {
+	background: #bdecb6;
+	border-radius: 18px;
+}
