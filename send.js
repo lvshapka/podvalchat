@@ -1,24 +1,36 @@
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-  const supabase = createClient(
-    'https://oxerwhayfykmxylnkxzp.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94ZXJ3aGF5ZnlrbXh5bG5reHpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1NjQ0ODgsImV4cCI6MjEwMzE0MDQ4OH0.iH6O7nViK6nsaUaB4-I5WiD_Pi7iKYpJFhTeiUO4d2A'
-  );
+const supabase = createClient(
+  'https://oxerwhayfykmxylnkxzp.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94ZXJ3aGF5ZnlrbXh5bG5reHpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1NjQ0ODgsImV4cCI6MjEwMzE0MDQ4OH0.iH6O7nViK6nsaUaB4-I5WiD_Pi7iKYpJFhTeiUO4d2A'
+);
 
-  const form = document.getElementById('postSend');
-  const textarea = document.getElementById('postText');
+const form = document.getElementById('postSend');
+const textarea = document.getElementById('postText');
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const text = textarea.value.trim();
-    if (!text) return alert('Пост не может быть пустым');
+async function getIP() {
+  const response = await fetch('https://api.ipify.org?format=json');
+  const data = await response.json();
+  return data.ip;
+}
 
-    const { error } = await supabase.from('posts').insert([{ text }]);
-    if (error) {
-      console.error(error);
-      alert('Ошибка отправки!');
-    } else {
-      textarea.value = '';
-      alert('Пост опубликован!');
-    }
-  });
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const text = textarea.value.trim();
+  if (!text) return alert('Пост не может быть пустым');
+
+  const ip = await getIP(); 
+
+  const { error } = await supabase.from('posts').insert([{ 
+    text: text,
+    ip: ip 
+  }]);
+
+  if (error) {
+    console.error(error);
+    alert('Ошибка отправки!');
+  } else {
+    textarea.value = '';
+    alert('Пост опубликован!');
+  }
+});
