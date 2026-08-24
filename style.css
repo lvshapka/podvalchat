@@ -1,0 +1,68 @@
+.hlogo {
+	width: 85px;
+	height: 75px;
+}
+
+.htext {
+	text-decoration: none;
+	font-family: Comic Sans MS;
+	font-size: 23px;
+	font-weight: 600;
+}
+
+header {
+	background: linear-gradient(#1e5945, #00cf00);
+	border-radius: 12px;
+	align-content: center;
+	gap: 10px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+	background: #1e5945;
+	text-align: center;
+}
+
+aside {
+	float: right;
+	background: #a7fc00;
+	border-radius: 12px;
+	padding: 10px;
+	margin: 10px;
+}
+
+p {
+    font-family: Comic Sans MS;
+	font-size: 17px;
+	font-weight: 400;
+}
+
+footer {
+	clear: both;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+    font-family: Comic Sans MS;
+	font-size: 17px;
+	font-weight: 400;
+	color: #000000;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #a7fc00;
+}
+
+.button {
+	background: linear-gradient(#30ba8f, #004524);
+	border-radius: 6px;
+	padding: 6px;
+}
+
+.button:hover {
+	background: linear-gradient(#004524, #30ba8f);
+}
