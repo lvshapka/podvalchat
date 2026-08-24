@@ -21,7 +21,6 @@ async function loadPosts() {
     feedContainer.innerHTML = data.map(post => `
       <div class="post">
         <p>${post.text}</p>
-        <small>${new Date(post.timestamp).toLocaleString()}</small>
       </div>
     `).join('');
   }
