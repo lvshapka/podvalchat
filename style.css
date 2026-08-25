@@ -72,7 +72,7 @@ div {
 	border-radius: 18px;
 }
 
-.userDisplay {
+#userDisplay {
   float: right;
   color: #a7fc00;
   font-family: Comic Sans MS;
