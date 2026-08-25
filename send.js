@@ -8,22 +8,22 @@ const supabase = createClient(
 const form = document.getElementById('postSend');
 const textarea = document.getElementById('postText');
 
-async function getIP() {
-  const response = await fetch('https://api.ipify.org?format=json');
-  const data = await response.json();
-  return data.ip;
-}
-
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const text = textarea.value.trim();
   if (!text) return alert('Пост не может быть пустым');
 
-  const ip = await getIP(); 
+  // Проверяем, авторизован ли пользователь
+  const username = localStorage.getItem('user');
+  if (!username) {
+    alert('Вы не авторизованы!');
+    window.location.href = 'login.html';
+    return;
+  }
 
   const { error } = await supabase.from('posts').insert([{ 
     text: text,
-    ip: ip 
+    username: username 
   }]);
 
   if (error) {
@@ -32,5 +32,6 @@ form.addEventListener('submit', async (e) => {
   } else {
     textarea.value = '';
     alert('Пост опубликован!');
+    window.location.href = 'index.html'; // Перенаправляем на главную
   }
 });
