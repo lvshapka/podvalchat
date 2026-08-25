@@ -71,3 +71,12 @@ div {
 	background: #bdecb6;
 	border-radius: 18px;
 }
+
+.userDisplay {
+  float: right;
+  color: #a7fc00;
+  font-family: Comic Sans MS;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
