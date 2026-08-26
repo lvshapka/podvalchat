@@ -1,13 +1,3 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-const supabase = createClient(
-  'https://oxerwhayfykmxylnkxzp.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94ZXJ3aGF5ZnlrbXh5bG5reHpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1NjQ0ODgsImV4cCI6MjEwMzE0MDQ4OH0.iH6O7nViK6nsaUaB4-I5WiD_Pi7iKYpJFhTeiUO4d2A'
-);
-
-const form = document.getElementById('postSend');
-const textarea = document.getElementById('postText');
-
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const text = textarea.value.trim();
@@ -21,9 +11,13 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
+  // Получаем IP-адрес
+  const ip = await getIP(); 
+
   const { error } = await supabase.from('posts').insert([{ 
     text: text,
-    username: username 
+    username: username,
+    ip: ip // <-- Добавлен IP
   }]);
 
   if (error) {
@@ -32,6 +26,6 @@ form.addEventListener('submit', async (e) => {
   } else {
     textarea.value = '';
     alert('Пост опубликован!');
-    window.location.href = 'index.html'; // Перенаправляем на главную
+    window.location.href = 'index.html';
   }
 });
